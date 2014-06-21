@@ -15,7 +15,6 @@ browserAppropriateAddEventListener
 browserAppropriateRemoveEventListener
 browserAppropriateStyleComputation
 getRelationship
-scrollProgress
 ajax
 
 ***********************/
@@ -60,6 +59,19 @@ var Rughster =
 		element.className = cleanList;
 
 		return true;
+	},
+	hasClass: function(element, potentialClass)
+	{
+		var classesArray = element.className.split(' ');
+		if(classesArray.indexOf(potentialClass) !== -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
 	},
 	removeClass: function(element, classes)
 	{
@@ -202,17 +214,6 @@ var Rughster =
 			failSafe++;
 		}
 		return relationship;
-	},
-	scrollProgress: function(elementRect, travelDistance, reachAtRatio)
-	{
-		var scrollProgVals = {}
-		var viewHeight = document.documentElement.clientHeight;
-
-		scrollProgVals.pctDown = Math.abs(1 - (elementRect.bottom / (viewHeight+ elementRect.height)));		
-		scrollProgVals.pctToGoal = scrollProgVals.pctDown / reachAtRatio;
-		scrollProgVals.pxMoved = Math.min(scrollProgVals.pctToGoal * travelDistance, travelDistance);
-		
-		return scrollProgVals;
 	},
 	ajax: function(requestMethod, url, params, callback)
 	{
